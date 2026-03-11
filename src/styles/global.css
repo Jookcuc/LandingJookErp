@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-jook-purple: #2B195D;
+  --color-jook-purple-light: #5A4A8C;
+  --color-jook-dark: #0D071D;
+  --color-jook-dark-light: #1C0F3C;
+  --color-jook-violet: #1F1243;
+  --color-jook-blue: #3B82F6;
+  --color-jook-accent: #FFD700;
+  --color-jook-deep-purple: #2B195D;
+  
+  --font-sans: "Montserrat", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans;
+  }
+}

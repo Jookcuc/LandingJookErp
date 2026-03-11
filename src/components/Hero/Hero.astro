@@ -1,0 +1,58 @@
+---
+import figuraFondo from "../../assets/FiguraFondo.svg";
+import HeroMockup from "../HeroMockup/HeroMockup.astro";
+
+const title =
+  "Toma el control total de tus finanzas y operaciones en un solo lugar.";
+const subtitle =
+  "Optimiza tu facturación, gestiona cuentas por pagar y controla tu inventario con una plataforma profesional diseñada para impulsar el crecimiento de tu negocio.";
+---
+
+<header
+  id="inicio"
+  class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-gradient-to-br from-[#1C0F3C] via-[#0D071D] to-[#0D071D] text-white min-h-screen flex items-center"
+>
+  {/* Background FiguraFondo */}
+  <div class="absolute inset-0 z-0 opacity-100 pointer-events-none">
+    <img
+      src={figuraFondo.src}
+      class="absolute top-[-10%] right-[-5%] w-[1500px] brightness-[4] mix-blend-screen"
+      alt=""
+    />
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-24 items-center">
+      <div class="text-left flex flex-col items-start max-w-2xl px-4">
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-8"
+        >
+          {title}
+        </h1>
+        <p
+          class="text-lg md:text-xl text-gray-300 mb-10 font-normal leading-relaxed"
+        >
+          {subtitle}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
+          <a
+            href="#contacto"
+            class="bg-[#1F1243] border border-[#2B195D] text-white px-10 py-4 rounded-[8px] text-lg font-bold transition-all hover:bg-opacity-90 text-center shadow-lg"
+          >
+            Empieza ahora
+          </a>
+          <a
+            href="#demo"
+            class="bg-white text-[#0D071D] px-10 py-4 rounded-[8px] text-lg font-bold transition-all hover:bg-gray-100 text-center shadow-lg"
+          >
+            Solicitar Demo
+          </a>
+        </div>
+      </div>
+
+      <div class="relative mt-12 lg:mt-0 lg:pl-12">
+        <HeroMockup />
+      </div>
+    </div>
+  </div>
+</header>

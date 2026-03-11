@@ -1,0 +1,83 @@
+---
+import figuraFondoBlanco from '../../assets/FIGURAFONDOblanco.png';
+import figuraGanancias from '../../assets/FiguraGanancias.png';
+---
+
+<section id="convertir" class="py-24 md:py-32 bg-white text-[#0D071D] relative overflow-hidden min-h-screen flex items-center reveal-section-ganancias">
+  {/* Background FiguraFondo Blanco - Smaller and higher */}
+  <div class="absolute inset-0 z-0 opacity-100 pointer-events-none">
+    <img 
+      src={figuraFondoBlanco.src} 
+      class="absolute top-[35%] right-[-5%] -translate-y-1/2 w-[1200px] max-w-none opacity-40 mix-blend-multiply transform rotate-180" 
+      style="transform: translateY(-50%) translateX(10%) rotate(180deg);"
+      alt="" 
+    />
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+    <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+      
+      {/* Image Container - Slightly smaller and centered */}
+      <div class="flex-1 w-full order-2 lg:order-1 opacity-0 -translate-x-12 transition-all duration-[1400ms] cubic-bezier(0.22, 1, 0.36, 1) reveal-image-ganancias">
+        <div class="relative max-w-2xl mx-auto">
+          <div class="bg-[#0D071D] rounded-[2.5rem] p-3 md:p-6 shadow-[0_50px_100px_-20px_rgba(13,7,29,0.3)] overflow-hidden transform transition-all duration-[1200ms] hover:scale-[1.01]">
+             <div class="overflow-hidden rounded-[1.8rem]">
+                <img 
+                  src={figuraGanancias.src} 
+                  alt="Balance y Reportes Financieros" 
+                  class="w-[90%] h-auto mx-auto object-cover scale-105 hover:scale-100 transition-transform duration-[2000ms]" 
+                />
+             </div>
+          </div>
+          <div class="absolute -top-10 -left-10 w-40 h-40 bg-[#2B195D]/10 blur-3xl rounded-full"></div>
+        </div>
+      </div>
+
+      {/* Text Content - Right side */}
+      <div class="flex-1 flex flex-col items-start text-left order-1 lg:order-2 opacity-0 translate-y-12 transition-all duration-[1400ms] cubic-bezier(0.22, 1, 0.36, 1) delay-200 reveal-content-ganancias">
+         <h2 class="text-5xl md:text-6xl font-bold mb-10 leading-tight">
+           Sigue tus ganancias <br /><span class="text-[#2B195D]">en tiempo real.</span>
+         </h2>
+         <div class="w-20 h-1.5 bg-[#2B195D] mb-10 rounded-full"></div>
+         <p class="text-xl text-gray-600 mb-12 leading-relaxed font-normal">
+           Visualiza el estado financiero de tu negocio con claridad absoluta. JookERP transforma tus datos en información valiosa para la toma de decisiones.
+         </p>
+         
+         <ul class="space-y-6 mb-10 text-lg font-bold text-[#0D071D] list-disc list-inside">
+           <li>Balance de ingresos y egresos automático.</li>
+           <li>Reportes de rentabilidad por producto o servicio.</li>
+           <li>Control de flujos de caja proyectados.</li>
+           <li>Dashboard integrales y fáciles de leer.</li>
+         </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const observerOptions = {
+    threshold: 0.2
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const content = entry.target.querySelector('.reveal-content-ganancias');
+        const image = entry.target.querySelector('.reveal-image-ganancias');
+        
+        if (content) {
+          content.classList.remove('opacity-0', 'translate-y-12');
+          content.classList.add('opacity-100', 'translate-y-0');
+        }
+        if (image) {
+          image.classList.remove('opacity-0', '-translate-x-12');
+          image.classList.add('opacity-100', 'translate-x-0');
+        }
+      }
+    });
+  }, observerOptions);
+
+  const section = document.querySelector('.reveal-section-ganancias');
+  if (section) observer.observe(section);
+</script>

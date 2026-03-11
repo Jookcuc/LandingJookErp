@@ -1,0 +1,68 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar/Navbar';
+import Footer from '../components/Footer/Footer.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "JookERP - La solución integral para el control total de tus finanzas y operaciones en un solo lugar." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<!-- Google Fonts: Montserrat -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-white text-gray-900 overflow-x-hidden">
+		<Navbar client:load />
+		<main>
+			<slot />
+		</main>
+		<Footer />
+
+		<style is:global>
+			/* Graceful Scroll Snapping */
+			html {
+				scroll-behavior: smooth;
+				/* 'proximity' makes it snap only when close, giving a more natural feel */
+				scroll-snap-type: y proximity;
+			}
+			
+			/* Sections that should snap gracefully */
+			header, 
+			section,
+			footer {
+				scroll-snap-align: start;
+				/* 'normal' allows for more fluid momentum scrolling */
+				scroll-snap-stop: normal;
+			}
+
+			/* Custom Scrollbar for better aesthetics */
+			::-webkit-scrollbar {
+				width: 8px;
+			}
+			::-webkit-scrollbar-track {
+				background: #f1f1f1;
+			}
+			::-webkit-scrollbar-thumb {
+				background: #0D071D;
+				border-radius: 10px;
+			}
+			::-webkit-scrollbar-thumb:hover {
+				background: #1C0F3C;
+			}
+		</style>
+	</body>
+</html>
