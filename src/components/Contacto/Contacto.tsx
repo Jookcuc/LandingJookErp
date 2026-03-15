@@ -38,12 +38,57 @@ export default function Contacto() {
     setStatus('loading');
 
     try {
-      // PROVISIONAL: INTEGRACIÓN CON SERVICIO DE EMAIL
-      // Placeholder para que el desarrollador de backend conecte su servicio (EmailJS, Resend, API propia, etc.)
-      // console.log("Enviando datos:", formState);
-      
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulando delay de red
-      
+      const { nombre, email, mensaje } = formState;
+
+      const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'accept': 'application/json',
+          'api-key': import.meta.env.PUBLIC_BREVO_API_KEY,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          sender: { name: import.meta.env.PUBLIC_BREVO_SENDER_NAME || 'Jook ERP', email: import.meta.env.PUBLIC_BREVO_SENDER_EMAIL || 'jookcucuta@gmail.com' },
+          to: [{ email: 'jookcucuta@gmail.com', name: 'Jook ERP' }],
+          replyTo: { email, name: nombre },
+          subject: `🟣 Nuevo mensaje de contacto - ${nombre}`,
+          htmlContent: `
+            <div style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;max-width:600px;margin:0 auto;background-color:#f8f9fa;">
+              <div style="background:linear-gradient(135deg,#0D071D 0%,#1C0F3C 50%,#2D1B69 100%);padding:40px 30px;text-align:center;border-radius:8px 8px 0 0;">
+                <h1 style="color:#fff;margin:0;font-size:24px;font-weight:700;">✉️ Nuevo Mensaje de Contacto</h1>
+                <p style="color:rgba(255,255,255,0.7);margin:10px 0 0;font-size:14px;">Recibido desde el formulario de JookERP Landing</p>
+              </div>
+              <div style="background-color:#fff;padding:30px;border-left:1px solid #e9ecef;border-right:1px solid #e9ecef;">
+                <div style="margin-bottom:24px;">
+                  <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#6c757d;letter-spacing:0.5px;margin-bottom:6px;">👤 Nombre</label>
+                  <p style="margin:0;font-size:16px;color:#212529;padding:12px 16px;background-color:#f8f9fa;border-radius:6px;border-left:3px solid #2D1B69;">${nombre}</p>
+                </div>
+                <div style="margin-bottom:24px;">
+                  <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#6c757d;letter-spacing:0.5px;margin-bottom:6px;">📧 Correo Electrónico</label>
+                  <p style="margin:0;font-size:16px;color:#212529;padding:12px 16px;background-color:#f8f9fa;border-radius:6px;border-left:3px solid #2D1B69;">
+                    <a href="mailto:${email}" style="color:#2D1B69;text-decoration:none;">${email}</a>
+                  </p>
+                </div>
+                <div style="margin-bottom:24px;">
+                  <label style="display:block;font-size:12px;font-weight:600;text-transform:uppercase;color:#6c757d;letter-spacing:0.5px;margin-bottom:6px;">💬 Mensaje</label>
+                  <div style="margin:0;font-size:16px;color:#212529;padding:16px;background-color:#f8f9fa;border-radius:6px;border-left:3px solid #2D1B69;line-height:1.6;white-space:pre-wrap;">${mensaje}</div>
+                </div>
+                <div style="text-align:center;margin-top:30px;">
+                  <a href="mailto:${email}?subject=Re: Mensaje de contacto JookERP" style="display:inline-block;background:linear-gradient(135deg,#2D1B69,#1C0F3C);color:#fff;padding:14px 32px;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">Responder a ${nombre}</a>
+                </div>
+              </div>
+              <div style="background-color:#f1f3f5;padding:20px 30px;text-align:center;border-radius:0 0 8px 8px;border:1px solid #e9ecef;border-top:none;">
+                <p style="margin:0;font-size:12px;color:#adb5bd;">Este correo fue enviado automáticamente desde el formulario de contacto de <strong style="color:#6c757d;">JookERP</strong></p>
+              </div>
+            </div>
+          `,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al enviar el correo');
+      }
+
       setStatus('success');
       setFormState({ nombre: '', email: '', mensaje: '' });
       
