@@ -59,20 +59,20 @@
   </div>
 
   <!-- Front Window: Pie Chart (Smaller and positioned better) -->
-  <div class="absolute bottom-[-10%] left-[-5%] w-[55%] h-[60%] bg-white rounded-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.4)] border border-gray-100 p-6 flex flex-col transform hover:translate-x-2 transition-transform duration-500 z-20">
-    <h3 class="text-xs font-bold text-gray-800 mb-6">Distribución del periodo</h3>
+  <div class="absolute bottom-[-10%] left-[-5%] w-[85%] sm:w-[65%] md:w-[55%] h-[auto] min-h-[60%] md:h-[60%] bg-white rounded-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.4)] border border-gray-100 p-4 sm:p-6 flex flex-col transform hover:translate-x-2 transition-transform duration-500 z-20">
+    <h3 class="text-xs sm:text-sm font-bold text-gray-800 mb-4 sm:mb-6">Distribución del periodo</h3>
     
-    <div class="flex-1 flex items-center justify-between gap-4">
+    <div class="flex-1 flex items-center justify-between gap-2 sm:gap-4">
       <!-- Donut Chart (Scaled down) -->
-      <div class="relative w-24 h-24 flex-shrink-0">
-        <svg viewBox="0 0 100 100" class="rotate-[-90deg]">
+      <div class="relative w-16 h-16 sm:w-24 sm:h-24 flex-shrink-0">
+        <svg viewBox="0 0 100 100" class="rotate-[-90deg] w-full h-full">
           <circle cx="50" cy="50" r="40" stroke="#F3F4F6" stroke-width="14" fill="none" />
           <circle cx="50" cy="50" r="40" stroke="#7C3AED" stroke-width="14" fill="none" stroke-dasharray="195 251" />
           <circle cx="50" cy="50" r="40" stroke="#10B981" stroke-width="14" fill="none" stroke-dasharray="40 251" stroke-dashoffset="-195" />
           <circle cx="50" cy="50" r="40" stroke="#6366F1" stroke-width="14" fill="none" stroke-dasharray="16 251" stroke-dashoffset="-235" />
         </svg>
         <div class="absolute inset-0 flex items-center justify-center">
-          <div class="w-12 h-12 bg-white rounded-full"></div>
+          <div class="w-8 h-8 sm:w-12 sm:h-12 bg-white rounded-full"></div>
         </div>
       </div>
 
