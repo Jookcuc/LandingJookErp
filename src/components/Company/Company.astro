@@ -1,0 +1,68 @@
+---
+import figuraFondoBlanco from '../../assets/FIGURAFONDOblanco.png';
+import jookLogo from '../../assets/JookPROsinfondosvg (1).svg';
+---
+
+<section id="company" class="py-20 md:py-32 bg-white text-[#0D071D] relative overflow-hidden flex items-center justify-center reveal-section-company min-h-screen">
+  {/* Background FiguraFondo Blanco 1 - Left */}
+  <div class="absolute inset-0 z-0 opacity-100 pointer-events-none">
+    <img 
+      src={figuraFondoBlanco.src} 
+      class="absolute top-[40%] left-[-8%] -translate-y-1/2 w-[1000px] max-w-none opacity-20 mix-blend-multiply transition-transform duration-1000 ease-out" 
+      alt="" 
+    />
+  </div>
+
+  {/* Background FiguraFondo Blanco 2 - Right/Bottom */}
+  <div class="absolute inset-0 z-0 opacity-100 pointer-events-none">
+    <img 
+      src={figuraFondoBlanco.src} 
+      class="absolute bottom-[-10%] right-[-10%] w-[1100px] max-w-none opacity-25 mix-blend-multiply transform rotate-180 transition-transform duration-1000 ease-out" 
+      alt="" 
+    />
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center flex flex-col items-center justify-center opacity-0 translate-y-12 transition-all duration-[1400ms] cubic-bezier(0.22, 1, 0.36, 1) reveal-content-company">
+    <h2 class="text-3xl md:text-5xl lg:text-[2.75rem] font-bold mb-8 leading-tight text-[#1E153A]">
+      Conoce a la empresa detrás de JOOKERP
+    </h2>
+    <p class="text-lg md:text-xl text-gray-700 mb-12 leading-relaxed font-medium max-w-2xl mx-auto">
+      Una empresa dedicada al desarrollo de experiencias digitales y entretenimiento innovador.
+    </p>
+    <a href="https://jookcucuta.online/" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#1E153A] hover:bg-[#2B195D] text-white font-medium py-3 px-12 rounded-[4px] transition-colors duration-300">
+      Conócenos
+    </a>
+  </div>
+
+  {/* Bottom Right Logo */}
+  <div class="absolute bottom-4 right-8 lg:bottom-6 lg:right-12 z-20 opacity-0 transition-opacity duration-[1400ms] delay-300 reveal-logo-company w-28">
+    <img src={jookLogo.src} alt="Jook Logo" class="w-full h-auto" />
+  </div>
+</section>
+
+<script>
+  const observerOptions = {
+    threshold: 0.2
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const content = entry.target.querySelector('.reveal-content-company');
+        const logo = entry.target.querySelector('.reveal-logo-company');
+        
+        if (content) {
+          content.classList.remove('opacity-0', 'translate-y-12');
+          content.classList.add('opacity-100', 'translate-y-0');
+        }
+        if (logo) {
+          logo.classList.remove('opacity-0');
+          logo.classList.add('opacity-100');
+        }
+      }
+    });
+  }, observerOptions);
+
+  const section = document.querySelector('.reveal-section-company');
+  if (section) observer.observe(section);
+</script>
